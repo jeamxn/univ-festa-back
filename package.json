@@ -1,15 +1,32 @@
 {
-  "name": "univ-festa-back",
+  "name": "khu-meal-back",
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "NODE_ENV=development bun run --watch src/index.ts",
+    "start": "NODE_ENV=production bun run src/index.ts"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@elysiajs/cors": "^1.2.0",
+    "@elysiajs/cron": "^1.2.0",
+    "@elysiajs/jwt": "^1.2.0",
+    "@elysiajs/swagger": "^1.2.2",
+    "@notionhq/client": "^2.3.0",
+    "axios": "^1.8.4",
+    "dayjs": "^1.11.13",
+    "elysia": "latest",
+    "ics": "^3.8.1",
+    "jose": "^6.0.10",
+    "mongoose": "^8.12.2"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "@eslint/eslintrc": "^3",
+    "bun-types": "latest",
+    "eslint": "^9",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "typescript": "^5",
+    "typescript-eslint": "^8.31.1"
   },
   "module": "src/index.js"
 }
