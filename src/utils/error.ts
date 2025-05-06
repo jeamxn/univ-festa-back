@@ -24,6 +24,7 @@ export type ERROR_RESPONSE = {
 };
 
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const tmpElysia = t.Object({
   success: t.Boolean({
     default: false,
