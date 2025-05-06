@@ -15,7 +15,7 @@ export interface DCalendar {
   guests: DGuests["id"][];
 }
 export type ICalendar = IDocument<DCalendar>;
-export type joinedCalendar = {
+export type JoinedCalendar = {
   id: string;
   title: string;
   date: string;
@@ -69,7 +69,7 @@ const calendarSchema = new mongoose.Schema({
 export const CalendarDB = mongoose.model<ICalendar>("Calendar", calendarSchema);
 
 const getJoinedCalendar = () => {
-  return CalendarDB.aggregate<joinedCalendar>([
+  return CalendarDB.aggregate<JoinedCalendar>([
     {
       $lookup: {
         from: "universities",
