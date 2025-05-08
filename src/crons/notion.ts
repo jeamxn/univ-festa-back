@@ -1,12 +1,13 @@
-import cron, { CronConfig, Patterns } from "@elysiajs/cron";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import cron, { Patterns } from "@elysiajs/cron";
 import dayjs from "dayjs";
 
-import { client, databases } from "@/utils/notion";
+import { CalendarDB } from "@/models/calendar";
 import { DGuests, GuestsDB } from "@/models/guests";
 import { UniversityDB } from "@/models/university";
-import { CalendarDB } from "@/models/calendar";
+import { client, databases } from "@/utils/notion";
 
-const run: CronConfig["run"] = async () => {
+export const run = async () => {
   try {
     console.log("🐩 Notion start at:", dayjs().format("YYYY-MM-DD HH:mm:ss"));
 
@@ -20,7 +21,7 @@ const run: CronConfig["run"] = async () => {
         cover: i.cover?.file.url ?? "",
         icon: i.icon?.file.url  ?? "",
         url: i.properties["나무위키"].url ?? ""
-      }
+      };
     });
     await GuestsDB.deleteMany({});
     await GuestsDB.insertMany(guests);
@@ -34,7 +35,7 @@ const run: CronConfig["run"] = async () => {
         id: i.id,
         name: i.properties["이름"].title[0].text.content,
         icon: i.icon.custom_emoji?.url ?? "",
-      }
+      };
     });
     await UniversityDB.deleteMany({});
     await UniversityDB.insertMany(univ);
@@ -53,7 +54,7 @@ const run: CronConfig["run"] = async () => {
         // university: univ_obj[i.properties["주최 대학교"].relation[0].id],
         guests: i.properties["게스트 목록"].relation.map((j: any) => j.id) ?? [],
         // guests: i.properties["게스트 목록"].relation.map((j: any) => guests_obj[j.id]) ?? [],
-      }
+      };
     });
     await CalendarDB.deleteMany({});
     await CalendarDB.insertMany(calendar);
